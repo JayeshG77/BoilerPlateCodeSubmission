@@ -1,0 +1,19 @@
+﻿using MediatR;
+using MediatRsession3.Models;
+using MediatRsession3.Services;
+
+namespace MediatRsession3.Data.Handlers
+{
+    public class GetProductByIdHandler : IRequestHandler<GetProductByIdQuery, Product>
+    {
+        readonly IProductService _productService;
+        public GetProductByIdHandler(IProductService productService)
+        {
+            _productService = productService;       
+        }
+        public async Task<Product> Handle(GetProductByIdQuery request, CancellationToken cancellationToken)
+        {
+            return await _productService.GetProductById(request.Id);
+        }
+    }
+}
